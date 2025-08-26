@@ -1,0 +1,157 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --dark-color: #161616;
+    --dark-mid: #242424;
+    --dark-light: #545454;
+    --light-color: #f8f9fa;
+    --success-color: #00b894;
+    --error-color: #d63031;
+    --warning-color: #fdcb6e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(160deg, var(--dark-color), var(--dark-mid));
+    color: var(--light-color);
+    min-height: 100vh;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px; /* centrado en móviles */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--dark-mid);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.upload-section {
+    background-color: var(--dark-mid);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.upload-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.drop-area {
+    border: 2px dashed var(--secondary-color);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.drop-area:hover, .drop-area.dragover {
+    background-color: rgba(84, 84, 84, 0.3);
+    transform: translateY(-3px);
+}
+
+.drop-area i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.drop-area p {
+    font-size: 1rem;
+}
+
+.file-input {
+    display: none;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+}
+
+.btn:hover {
+    background-color: #5649c5;
+    transform: translateY(-2px);
+}
+
+.btn i {
+    margin-right: 6px;
+}
+
+.message {
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+    font-size: 0.9rem;
+}
+
+.success {
+    background-color: var(--success-color);
+}
+
+.error {
+    background-color: var(--error-color);
+}
+
+.warning {
+    background-color: var(--warning-color);
+    color: #2d3436;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+/* 📱 Mejoras en móviles */
+@media (max-width: 600px) {
+    h1 { font-size: 1.5rem; }
+    .drop-area { padding: 25px; }
+    .btn { font-size: 0.85rem; padding: 8px 15px; }
+    .upload-section h2 { font-size: 1rem; }
+}
