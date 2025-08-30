@@ -1,125 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upload</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-.drop-area {
-    border: 2px dashed #ccc;
-    border-radius: 12px;
-    padding: 30px;
-    cursor: pointer;
-    text-align: center;
-    transition: 0.3s;
-}
-.drop-area.dragover {
-    border-color: #007bff;
-    background: #e7f1ff;
-}
-.btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-.btn:hover { background: #0056b3; }
-.message.success { 
-    color: green; 
-    background: #e7ffe7;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 15px;
-    text-align: center;
-}
-.message.error { 
-    color: red; 
-    background: #ffe7e7;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 15px;
-    text-align: center;
-}
-.message.warning { 
-    color: orange; 
-    background: #fff4e7;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 15px;
-    text-align: center;
-}
-.file-input { display: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1><i class="fas fa-image"></i> Walls</h1>
-        <p class="subtitle">Agrega tus fondos para la app</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-image"></i> Walls</h1>
+            <p class="subtitle">Agrega tus fondos para la app</p>
+        </header>
 
-    <section class="upload-section">
-        <h2>Subir nuevo wallpaper</h2>
-        <div class="drop-area" id="dropArea">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Arrastra tu imagen aquí</p>
-            <button class="btn" id="selectBtn"><i class="fas fa-file-image"></i> Seleccionar Wallpaper</button>
-            <input type="file" id="fileInput" class="file-input" accept="image/*">
-        </div>
-        <div id="message" class="message"></div>
-    </section>
-</div>
+        <section class="upload-section">
+            <h2>Subir nuevo wallpaper</h2>
+            <div class="drop-area" id="dropArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Arrastra tu imagen aquí</p>
+                <button class="btn" id="selectBtn"><i class="fas fa-file-image"></i> Seleccionar Wallpaper</button>
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
+            </div>
+            <div id="message" class="message"></div>
+        </section>
+        
+        <footer>
+            <p>Walls © 2026 - Los mejores fondos de pantalla</p>
+            <p>Al seleccionar "Subir", declaras que este artículo no es obsceno ni infringe las Condiciones de Servicio de Walls, y que posees todos los derechos de autor de este artículo o cuentas con el permiso expreso de sus titulares para subirlo. <a href="https://virtualstudios6.github.io/Walls-Politicas/privacy" target="_self">Ver políticas de privacidad</a></p>
+        </footer>
+    </div>
 
-<script>
-const dropArea = document.getElementById('dropArea');
-const fileInput = document.getElementById('fileInput');
-const selectBtn = document.getElementById('selectBtn');
-const message = document.getElementById('message');
-
-['dragenter','dragover','dragleave','drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName,e=>{e.preventDefault();e.stopPropagation();});
-});
-['dragenter','dragover'].forEach(eventName => dropArea.addEventListener(eventName,()=>dropArea.classList.add('dragover')));
-['dragleave','drop'].forEach(eventName => dropArea.addEventListener(eventName,()=>dropArea.classList.remove('dragover')));
-
-selectBtn.addEventListener('click',()=>fileInput.click());
-dropArea.addEventListener('drop',e=>handleFiles(e.dataTransfer.files));
-fileInput.addEventListener('change',e=>handleFiles(e.target.files));
-
-function handleFiles(files){
-    if(!files.length) return;
-    const file = files[0];
-
-    if(!file.type.match('image.*')) { showMessage('Por favor, sube solo imágenes','error'); return; }
-    if(file.size > 10*1024*1024) { showMessage('La imagen no debe superar 10MB','error'); return; }
-
-    // Subir archivo
-    const formData = new FormData();
-    formData.append('wallpaper', file);
-    showMessage('Subiendo imagen...','warning');
-
-    fetch('uploads/upload.php',{method:'POST',body:formData})
-    .then(response=>response.text())
-    .then(data => {
-        showMessage('¡Imagen subida con éxito! Nuestro equipo la revisará antes de publicarla.','success');
-        // Limpiar el input de archivo
-        fileInput.value = '';
-    })
-    .catch(()=>showMessage('Error al subir la imagen. Intenta de nuevo.','error'));
-}
-
-function showMessage(text,type){
-    message.textContent = text;
-    message.className='message';
-    if(type) message.classList.add(type);
-    message.style.display='block';
-    setTimeout(()=>message.style.display='none',4000);
-}
-</script>
+    <script src="js/script.js"></script>
 </body>
 </html>

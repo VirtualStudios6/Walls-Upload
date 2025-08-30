@@ -31,12 +31,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         showMessage('Subiendo imagen...', 'warning');
 
-        fetch('uploads/upload.php', {  // apunta a tu PHP dentro de la carpeta uploads
+        fetch('uploads/upload.php', {
             method: 'POST',
             body: formData
         })
         .then(response => response.text())
-        .then(data => showMessage(data, 'success'))
+        .then(data => {
+            showMessage('¡Imagen subida con éxito! Nuestro equipo la revisará antes de publicarla.', 'success');
+            fileInput.value = '';
+        })
         .catch(() => showMessage('Error al subir la imagen. Intenta de nuevo.', 'error'));
     }
 

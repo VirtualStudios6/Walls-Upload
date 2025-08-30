@@ -29,7 +29,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 500px; /* centrado en móviles */
+    max-width: 500px;
 }
 
 header {
@@ -148,7 +148,15 @@ footer {
     font-size: 0.8rem;
 }
 
-/* 📱 Mejoras en móviles */
+footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
     h1 { font-size: 1.5rem; }
     .drop-area { padding: 25px; }
